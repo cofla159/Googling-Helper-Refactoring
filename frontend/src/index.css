@@ -1,0 +1,136 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html .toastui-editor-contents h1 {
+  font-size: 30px;
+  line-height: 44px;
+  border-bottom: 3px double #999;
+  margin: 52px 0 15px 0;
+  padding-bottom: 7px;
+}
+
+html .toastui-editor-contents h2 {
+  font-size: 28px;
+  line-height: 40px;
+  border-bottom: 1px solid #dbdbdb;
+  margin: 20px 0 13px 0;
+  padding-bottom: 7px;
+}
+
+html .toastui-editor-contents h3 {
+  font-size: 26px;
+  margin: 18px 0 2px;
+}
+
+html .toastui-editor-contents h4 {
+  font-size: 24px;
+  margin: 10px 0 2px;
+}
+
+html .toastui-editor-contents h3,
+html .toastui-editor-contents h4 {
+  line-height: 36px;
+}
+
+html .toastui-editor-contents h5 {
+  font-size: 22px;
+}
+
+html .toastui-editor-contents h6 {
+  font-size: 20px;
+}
+
+html .toastui-editor-contents h5,
+html .toastui-editor-contents h6 {
+  line-height: 30px;
+  margin: 9px 0 -4px;
+}
+html .toastui-editor-contents {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+.logo {
+  font-family: "Product Sans", sans-serif;
+}
+
+@layer components {
+  .btn-red {
+    @apply w-full duration-200 text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-1.5;
+  }
+
+  .btn-white {
+    @apply border-2 border-red-300 text-red-300 hover:bg-red-400 hover:border-red-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2 duration-200;
+  }
+  .btn-bluewhite {
+    @apply border-2 border-blue-300 text-blue-300 hover:bg-blue-400 hover:border-blue-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-base px-4 py-1 duration-200;
+  }
+
+  .btn-toggle {
+    @apply font-semibold hover:bg-red-100 focus:ring-2 focus:outline-0 focus:ring-red-300 rounded-lg text-2xl px-3 py-1.5 my-2 text-start pr-8;
+  }
+
+  .btn-toggle-yellow {
+    @apply font-semibold hover:bg-amber-100 focus:ring-2 focus:outline-0 focus:ring-amber-300 rounded-lg text-2xl px-3 py-1.5 my-2 text-start pr-8;
+  }
+
+  .btn-blue {
+    @apply w-[110%] duration-200 text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-1.5;
+  }
+
+  .btn-green {
+    @apply w-full duration-200 text-white bg-emerald-400 hover:bg-emerald-500 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-semibold rounded-lg text-sm px-5 py-1.5;
+  }
+
+  .btn-yellow {
+    @apply w-full duration-200 text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-amber-300 font-semibold rounded-lg text-sm px-5 py-1.5;
+  }
+
+  .btn-title {
+    @apply w-[100%] font-normal focus:ring-2 focus:outline-none focus:ring-red-300 rounded-lg text-base relative pl-3 py-1 break-keep pr-6 text-start;
+  }
+
+  .drag-tooltip {
+    @apply w-full h-full text-center break-keep absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-slate-500 leading-[100%];
+  }
+
+  .iframe {
+    @apply w-full h-[70vh] drop-shadow-md rounded-md mb-5 border;
+  }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
