@@ -3,6 +3,7 @@ const express = require("express");
 const { connectDB, client } = require("./config/mongodb");
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 const cors = require("cors");
@@ -83,4 +84,4 @@ app.use("/api/textCollect", textCollectRouter);
 
 connectDB();
 
-app.listen(process.env.PORT || 5000, "0.0.0.0", () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => console.log(`Server started on port ${PORT}`));
