@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "X-Frame-Options",
+          "operation": "remove"
+        }
+      ]
+    },
+    "condition": {
+      "resourceTypes": ["sub_frame"],
+      "initiatorDomains": ["www.google.com", "www.google.co.kr", "googlingHelper.shop"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Content-Security-Policy",
+          "operation": "remove"
+        }
+      ]
+    },
+    "condition": {
+      "resourceTypes": ["sub_frame"],
+      "initiatorDomains": ["www.google.com", "www.google.co.kr", "googlingHelper.shop"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Frame-Options",
+          "operation": "remove"
+        }
+      ]
+    },
+    "condition": {
+      "resourceTypes": ["sub_frame"],
+      "initiatorDomains": ["www.google.com", "www.google.co.kr", "googlingHelper.shop"]
+    }
+  }
+]
