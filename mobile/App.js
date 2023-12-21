@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
 export default function App() {
-  return <WebView style={styles.container} source={{ uri: "https://googlinghelper.shop/" }} />;
+  return <WebView style={styles.container} source={{ uri: "http://localhost:3000/" }} webviewDebuggingEnabled={true} />;
 }
 
 const styles = StyleSheet.create({
