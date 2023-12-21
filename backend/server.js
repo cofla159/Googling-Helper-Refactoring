@@ -83,4 +83,4 @@ app.use("/api/textCollect", textCollectRouter);
 
 connectDB();
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT || 5000, () => console.log(`Server started on port ${PORT}`));
