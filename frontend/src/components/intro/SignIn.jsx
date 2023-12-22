@@ -1,19 +1,13 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
-
-export default function SignIn(prop) {
+export default function SignIn({ handleLogin }) {
   const go = useNavigate();
-
-  const { handleLogin } = prop;
-  const [cookies, setCookie, removeCookie] = useCookies("accessToken");
   const [showPassword, setShowPassword] = useState(false);
-
   const email = useRef("");
-  const password= useRef("");
+  const password = useRef("");
 
   const handleCheckboxChange = () => {
     setShowPassword(!showPassword);
@@ -21,41 +15,33 @@ export default function SignIn(prop) {
 
   const handleCookie = (data) => {
     const expireDate = new Date();
-    // 동적으로 바꾸기
     expireDate.setMinutes(expireDate.getMinutes() + 600);
-    setCookie("accessToken", data, {
-      path: "/",
-      expires: expireDate,
-      secure: true,
-      sameSite: "none",
-    });
+    document.cookie = `accessToken=${data}; expires=${expireDate}; Secure; path=/`;
   };
   const emailHandler = (event) => {
     email.current = event.target.value;
   };
-  
+
   const passwordHandler = (event) => {
     password.current = event.target.value;
-
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    if (email.current === '' ){
+    if (email.current === "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "이메일을 입력하세요.",
       });
-      return
-    }
-    else if (password.current === ''){
+      return;
+    } else if (password.current === "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "비밀번호를 입력하세요.",
       });
-      return
+      return;
     }
     await axios
       .post(
@@ -94,9 +80,7 @@ export default function SignIn(prop) {
     <div className="p-6 pb-0">
       <form className="space-y-1" onSubmit={submitHandler}>
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 ">
-            Email
-          </label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  "
             placeholder="name@gmail.com"
@@ -104,9 +88,7 @@ export default function SignIn(prop) {
           />
         </div>
         <div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 ">
-            Password
-          </label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
           <input
             placeholder="••••••••"
             type={showPassword ? "text" : "password"}
@@ -115,13 +97,8 @@ export default function SignIn(prop) {
           />
         </div>
         <div className="pt-1">
-          <label >
-            <input
-              className=""
-              type="checkbox"
-              checked={showPassword}
-              onChange={handleCheckboxChange}
-            />
+          <label>
+            <input className="" type="checkbox" checked={showPassword} onChange={handleCheckboxChange} />
             <span className="pl-2">비밀번호 보기</span>
           </label>
         </div>
@@ -134,10 +111,7 @@ export default function SignIn(prop) {
         </button>
         <p className="pt-2 text-sm font-light text-gray-600  ">
           계정이 없으신가요? {""}
-          <button
-            onClick={handleLogin}
-            className="font-medium text-red-600 hover:underline "
-          >
+          <button onClick={handleLogin} className="font-medium text-red-600 hover:underline ">
             회원가입하러 가기
           </button>
         </p>
