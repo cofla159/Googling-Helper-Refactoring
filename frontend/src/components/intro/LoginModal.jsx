@@ -12,7 +12,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  // border: "1px solid #fe6767",
   boxShadow: 24,
   p: 4,
 };
@@ -20,29 +19,24 @@ const theme = createTheme({
   zIndex: {
     modal: 1060,
   },
-})
+});
 
 export default function LoginModal(prop) {
   const { open, openToggle } = prop;
   const [login, setLogin] = useState(false);
 
   const handleLogin = () => {
-    setLogin(!login)
-  }
+    setLogin(!login);
+  };
   const title = !login ? "로그인" : "회원가입";
-  const contents = !login ? <SignIn handleLogin={handleLogin}/> : <SignUp handleLogin={handleLogin}/>;
+  const contents = !login ? <SignIn handleLogin={handleLogin} /> : <SignUp handleLogin={handleLogin} />;
 
   return (
     <div>
-      <Modal
-        open={open}
-        theme={theme}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} theme={theme} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box
           sx={style}
-          className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl "
+          className="inline-block text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl h-full lg:h-fit"
         >
           <button
             onClick={openToggle}
@@ -51,10 +45,8 @@ export default function LoginModal(prop) {
             X
           </button>
 
-          <div className="font-semibold text-center text-3xl text-red-400">
-            {title}
-          </div>
-            {contents}
+          <div className="font-semibold text-center text-3xl text-red-400">{title}</div>
+          {contents}
         </Box>
       </Modal>
     </div>
