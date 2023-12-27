@@ -34,7 +34,7 @@ export default function Intro() {
       <section className="relative bg-cover object-fill w-full bg-center">
         <div className="max-w-screen-xl mx-auto">
           <div className="grid grid-cols-1 gap-0 items-center lg:grid-cols-6 xl:grid-cols-5">
-            <article className="flex flex-col p-20 pl-10 pb-10 items-center lg:items-start lg:col-span-4 xl:col-span-3 mt-24 false">
+            <article className="flex flex-col py-20 px-auto lg:pl-20 pb-10 items-center lg:items-start lg:col-span-4 xl:col-span-3 mt-24 false">
               <h1 className="logo font-semibold text-center md:text-left mb-4 md:whitespace-nowrap text-6xl md:text-7xl -ml-2 drop-shadow-lg">
                 <span className="text-google-blue">G</span>
                 <span className="text-google-red">o</span>
@@ -58,14 +58,7 @@ export default function Intro() {
       </section>
       <div className="bg-red-400 w-full h-40 transform -skew-y-[4deg]"></div>
       <div className="absolute top-[30rem] bg-red-400 w-full pt-[10rem] pb-[21rem]">
-        <div className="gap-4 p-10 space-y-10 xl:grid xl:grid-cols-3">
-          <div className="flex flex-col justify-center ">
-            <p></p>
-            <p></p>
-          </div>
-          <div className="flex flex-col justify-center "></div>
-          <div className="flex flex-col justify-center "></div>
-        </div>
+        <div className="gap-4 p-10 space-y-10 xl:grid xl:grid-cols-3"></div>
       </div>
       <LoginModal openToggle={modalToggle} open={open} />
     </div>

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import SearchIcon from "@mui/icons-material/Search";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function Header({ receiveSearchContents, searchRef }) {
   const [cookies, setCookie, removeCookie] = useCookies("accessToken");
@@ -56,7 +57,7 @@ export default function Header({ receiveSearchContents, searchRef }) {
       });
       go("/");
     }
-  },[]);
+  }, []);
 
   const changeSearchContents = (event) => {
     searchRef.current = event.target.value;
@@ -64,22 +65,18 @@ export default function Header({ receiveSearchContents, searchRef }) {
 
   return (
     <div className="shadow z-10 mb-0.5">
-      <div className="flex items-center text-3xl p-3 sm:px-6 lg:px-8 justify-between">
-        <div className="logo">
-          <span className="text-google-blue">G</span>
-          <span className="text-google-red">o</span>
-          <span className="text-google-yellow">o</span>
-          <span className="text-google-blue">g</span>
-          <span className="text-google-green">l</span>
-          <span className="text-black">ing Helper</span>
+      <div className="flex items-end text-3xl p-3 sm:px-6 lg:px-8 justify-between">
+        <Logo />
+        <div className="invisible lg:hidden">
+          <UserName userName={userName} />
         </div>
-        <div className="w-[50%]">
+        <div className="w-2/4 lg:w-2/4">
           <div className="flex text-sm border rounded-lg focus:ring-blue-300">
             <input
               className="w-[100%] h-10 pl-4 focus:ring-2 rounded-lg focus:outline-none"
               onChange={changeSearchContents}
               onKeyDown={(event) => {
-                if (event.keyCode === 13) {
+                if (["Enter", "NumpadEnter"].includes(event.key)) {
                   receiveSearchContents(searchRef.current);
                 }
               }}
@@ -96,17 +93,35 @@ export default function Header({ receiveSearchContents, searchRef }) {
             </button>
           </div>
         </div>
-        <div className="flex space-x-2 items-end">
-          <div className="flex pr-6 space-x-1 items-baseline">
-
-          <div className="font-semibold flex text-2xl ">{userName}</div>
-          <div className="text-base ">님</div>
-          </div>
-          <button onClick={logout} className="btn-white">
-            로그아웃
+        <div className="lg:flex lg:space-x-2 lg:items-end">
+          <UserName userName={userName} />
+          <button onClick={logout} className="btn-white text-xs pr-1 pl-2 hidden lg:block">
+            <LogoutIcon fontSize="small" />
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Logo() {
+  return (
+    <div className="logo hidden lg:block">
+      <span className="text-google-blue">G</span>
+      <span className="text-google-red">o</span>
+      <span className="text-google-yellow">o</span>
+      <span className="text-google-blue">g</span>
+      <span className="text-google-green">l</span>
+      <span className="text-black">ing Helper</span>
+    </div>
+  );
+}
+
+function UserName({ userName }) {
+  return (
+    <div className="flex lg:pr-6 space-x-1 items-baseline">
+      <div className="font-semibold flex text-lg lg:text-2xl ">{userName}</div>
+      <div className="text-base ">님</div>
     </div>
   );
 }
