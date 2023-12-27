@@ -10,45 +10,39 @@ export default function Header({ receiveSearchContents, searchRef }) {
   const [cookies, setCookie, removeCookie] = useCookies("accessToken");
   const [userName, setUserName] = useState(null);
   const go = useNavigate();
-  const logout = async () => {
+  const logoutHandler = async () => {
     if (cookies.accessToken) {
-      await axios
-        .get(`${process.env.REACT_APP_SERVER_ADDR}/api/logout`, {
+      try {
+        await axios.get(`${process.env.REACT_APP_SERVER_ADDR}/api/logout`, {
           headers: {
             "x-auth-token": cookies.accessToken,
           },
-        })
-        .then((res) => {
-          removeCookie("accessToken");
-          go("/");
-        })
-        .catch((error) => {
-          console.error(error);
-          removeCookie("accessToken");
-          go("/");
         });
-    } else {
-      go("/");
+        removeCookie("accessToken");
+      } catch (error) {
+        console.error(error);
+      }
     }
+    go("/");
   };
   useEffect(() => {
     if (cookies.accessToken) {
-      axios
-        .post(
-          `${process.env.REACT_APP_SERVER_ADDR}/api/giveUserName`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.accessToken}`,
-            },
-          }
-        )
-        .then((res) => {
-          setUserName(res.data.username);
-        })
-        .catch((error) => {
+      (async function fetchUserName() {
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_ADDR}/api/giveUserName`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${cookies.accessToken}`,
+              },
+            }
+          );
+          setUserName(response.data.username);
+        } catch (error) {
           console.error(error);
-        });
+        }
+      })();
     } else {
       Swal.fire({
         icon: "error",
@@ -95,7 +89,7 @@ export default function Header({ receiveSearchContents, searchRef }) {
         </div>
         <div className="lg:flex lg:space-x-2 lg:items-end">
           <UserName userName={userName} />
-          <button onClick={logout} className="btn-white text-xs pr-1 pl-2 hidden lg:block">
+          <button onClick={logoutHandler} className="btn-white text-xs pr-1 pl-2 hidden lg:block">
             <LogoutIcon fontSize="small" />
           </button>
         </div>
