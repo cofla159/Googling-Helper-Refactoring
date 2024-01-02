@@ -27,7 +27,7 @@ export default function Header({ receiveSearchContents, searchRef }) {
   };
   useEffect(() => {
     if (cookies.accessToken) {
-      (async function fetchUserName() {
+      (async function () {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_ADDR}/api/giveUserName`,
