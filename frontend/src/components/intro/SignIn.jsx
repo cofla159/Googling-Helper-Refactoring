@@ -43,8 +43,8 @@ export default function SignIn({ handleLogin }) {
       });
       return;
     }
-    await axios
-      .post(
+    try {
+      const response = await axios.post(
         `${process.env.REACT_APP_SERVER_ADDR}/api/login`,
         {},
         {
@@ -54,26 +54,24 @@ export default function SignIn({ handleLogin }) {
             password: password.current,
           },
         }
-      )
-      .then((res) => {
-        handleCookie(res.data.token);
-        go("/storage");
-      })
-      .catch((error) => {
-        console.error(error);
-        if (error.message === "Network Error") {
-          return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "네트워크 에러!",
-          });
-        }
-        Swal.fire({
+      );
+      handleCookie(response.data.token);
+      go("/storage");
+    } catch (error) {
+      console.error(error);
+      if (error.message === "Network Error") {
+        return Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "이메일 또는 비밀번호가 일치하지 않습니다.",
+          text: "네트워크 에러!",
         });
+      }
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "이메일 또는 비밀번호가 일치하지 않습니다.",
       });
+    }
   };
 
   return (

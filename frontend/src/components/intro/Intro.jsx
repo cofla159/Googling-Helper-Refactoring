@@ -10,20 +10,20 @@ export default function Intro() {
   const go = useNavigate();
 
   useEffect(() => {
-    if (cookies.accessToken) {
-      axios
-        .get(`${process.env.REACT_APP_SERVER_ADDR}/api/auth`, {
-          headers: {
-            "x-auth-token": cookies.accessToken,
-          },
-        })
-        .then((res) => {
+    (async function () {
+      if (cookies.accessToken) {
+        try {
+          await axios.get(`${process.env.REACT_APP_SERVER_ADDR}/api/auth`, {
+            headers: {
+              "x-auth-token": cookies.accessToken,
+            },
+          });
           go("/storage");
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(error);
-        });
-    }
+        }
+      }
+    })();
   }, []);
 
   const modalToggle = () => {

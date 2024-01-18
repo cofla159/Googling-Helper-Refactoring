@@ -7,24 +7,26 @@ export default function CollectionText({ handleDragStart }) {
   const [collectText, setCollectText] = useState([]);
 
   useEffect(() => {
-    if (cookies.accessToken) {
-      axios
-        .get(`${process.env.REACT_APP_SERVER_ADDR}/api/textCollect`, {
-          headers: {
-            Authorization: `Bearer ${cookies.accessToken}`,
-          },
-        })
-        .then((res) => {
-          if (res.data.length === 0) {
+    (async function () {
+      if (cookies.accessToken) {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_SERVER_ADDR}/api/textCollect`, {
+            headers: {
+              Authorization: `Bearer ${cookies.accessToken}`,
+            },
+          });
+
+          if (response.data.length === 0) {
             setCollectText(null);
             return;
           }
-          setCollectText(res.data);
-        })
-        .catch((error) => {
+          setCollectText(response.data);
+        } catch (error) {
           console.error(error);
-        });
-    }
+        }
+      }
+    })();
+    
   }, [cookies.accessToken]);
 
   return (

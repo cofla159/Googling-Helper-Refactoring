@@ -52,8 +52,8 @@ export default function SignUp(prop) {
         text: "예시: google@gmail.com",
       });
     }
-    await axios
-      .post(
+    try {
+      await axios.post(
         `${process.env.REACT_APP_SERVER_ADDR}/api/register`,
         {
           name: name.current,
@@ -65,37 +65,35 @@ export default function SignUp(prop) {
             "Content-Type": "application/json",
           },
         }
-      )
-      .then((res) => {
-        handleLogin();
-        Swal.fire({
-          icon: "success",
-          title: "회원가입 완료!",
-        });
-      })
-      .catch((error) => {
-        if (error.response.data.msg ==="Email already exists") {
-          return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "이미 존재하는 Email 입니다.",
-          });
-        }
-        if (error.response.data.msg ==="User name already exists") {
-          return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "이미 존재하는 Name 입니다.",
-          });
-        }
-        console.error(error);
-        Swal.fire({
+      );
+      handleLogin();
+      Swal.fire({
+        icon: "success",
+        title: "회원가입 완료!",
+      });
+    } catch (error) {
+      if (error.response.data.msg === "Email already exists") {
+        return Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "회원가입 실패!",
-          confirmButtonColor: "#0ea5e9",
+          text: "이미 존재하는 Email 입니다.",
         });
+      }
+      if (error.response.data.msg === "User name already exists") {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "이미 존재하는 Name 입니다.",
+        });
+      }
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "회원가입 실패!",
+        confirmButtonColor: "#0ea5e9",
       });
+    }
   };
   return (
     <div className="p-6  pb-0">
